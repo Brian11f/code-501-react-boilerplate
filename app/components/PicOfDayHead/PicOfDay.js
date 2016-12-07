@@ -1,7 +1,7 @@
 import React from 'react'
 import format from 'date-fns/format'
 
-const MessageBox = ({author, message, date }) =>
+const PicOfDay = ({author, message, date }) =>
   <li>
     <div>
       <img src={`https://message-list.appspot.com/${author.photoUrl}`} alt={author.name} />
@@ -21,4 +21,4 @@ const MessageBox = ({author, message, date }) =>
     date: React.PropTypes.date
   }
 
-  export default Object.assign(MessageBox, propTypes)
+  export default Object.assign(PicOfDay, propTypes)

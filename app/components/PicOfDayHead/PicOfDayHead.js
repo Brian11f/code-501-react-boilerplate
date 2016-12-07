@@ -1,32 +1,33 @@
 import React from 'react'
 import axios from 'axios'
 
-import MessageBox from './MessageBox'
+import PicOfDay from './PicOfDay'
 
-class MessageList extends React.Component {
+class PicOfDayHead extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      messageList: []
+      picOfDayHead: []
     }
   }
   componentDidMount () {
-    axios.get('https://message-list.appspot.com/messages?limit=10')
+    axios.get('https://api.unsplash.com/photos/random?client_id=fd813aa7399829fbd496ff9ba7fa3cead32c30fa4089c952af6bc7ab8722e65e')
       .then((res) => {
         this.setState({
-          messageList: res.data.messages
+          picOfDayHead: res.data.messages
         })
+        console.log(picOfDayHead);
       })
       .catch((res) => {
         console.error(res)
       })
   }
   render () {
-    if (this.state.messageList.length > 0) {
+    if (this.state.picOfDayHead.length > 0) {
       return (
         <ul>
-          {this.state.messageList.map((message, i) =>
-              <MessageBox
+          {this.state.picOfDayHead.map((message, i) =>
+              <PicOfDay
                 key={i}
                 author={message.author}
                 message={message.content}
@@ -43,4 +44,4 @@ class MessageList extends React.Component {
   }
 }
 
-export default MessageList
+export default PicOfDayHead

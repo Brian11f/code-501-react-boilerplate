@@ -1,26 +1,12 @@
 import React from 'react'
 
-import Bio from '../Bio/Bio'
-import BooksList from '../BooksList/BooksList'
-import MessageList from '../MessageList/MessageList'
+import PicOfDayHead from '../PicOfDayHead/PicOfDayHead'
 
 class HomePage extends React.Component {
   render () {
     return (
       <main>
-        <Bio
-          myName='Brian'
-          age='28'
-          pronoun={{
-            nominative: 'he',
-            accusative: 'him',
-            possessive: 'his',
-            reflecive: 'himself'
-          }}
-          favoriteActivity='React'
-          />
-        <BooksList />
-        <MessageList />
+        <PicOfDayHead />
       </main>
     )
   }
