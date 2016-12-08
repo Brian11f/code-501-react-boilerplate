@@ -7,40 +7,39 @@ class PicOfDayHead extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      picOfDayHead: []
+      pictures: ''
     }
   }
   componentDidMount () {
-    axios.get('https://api.unsplash.com/photos/random?client_id=fd813aa7399829fbd496ff9ba7fa3cead32c30fa4089c952af6bc7ab8722e65e')
+    const id = 'fd813aa7399829fbd496ff9ba7fa3cead32c30fa4089c952af6bc7ab8722e65e'
+    const url = `https://api.unsplash.com/photos/random?client_id=${id}`
+
+    axios.get(url)
       .then((res) => {
+        const newPicture = res.data.urls
         this.setState({
-          picOfDayHead: res.data.messages
+          pictures: newPicture
         })
-        console.log(picOfDayHead);
+        console.log(this.state.pictures);
       })
-      .catch((res) => {
-        console.error(res)
+      .catch((err) => {
+        console.error('An error occurred ', err)
       })
   }
   render () {
-    if (this.state.picOfDayHead.length > 0) {
-      return (
-        <ul>
-          {this.state.picOfDayHead.map((message, i) =>
-              <PicOfDay
-                key={i}
-                author={message.author}
-                message={message.content}
-                date={message.updated}
-              />
-          )}
-        </ul>
-      )
-    } else {
-      return (
-        <p>Something is wrong!</p>
-      )
-    }
+    return (
+      <ul>
+        {/* {this.state.picOfDayHead.map((message, i) =>
+            <PicOfDay
+              key={i}
+              author={message.author}
+              message={message.content}
+              date={message.updated}
+            />
+        )} */}
+        <img src={this.state.pictures.full} alt='photo' />
+      </ul>
+    )
   }
 }
 
