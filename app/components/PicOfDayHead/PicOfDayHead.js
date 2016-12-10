@@ -12,18 +12,27 @@ class PicOfDayHead extends React.Component {
   }
   componentDidMount () {
     const id = 'fd813aa7399829fbd496ff9ba7fa3cead32c30fa4089c952af6bc7ab8722e65e'
-    const url = `https://api.unsplash.com/photos/random?client_id=${id}`
 
-    axios.get(url)
+    // Get random photo
+    const randomPhoto = `https://api.unsplash.com/photos/random?client_id=${id}`
+
+    // Get collection of photos
+    function collectionUrl (collectionId) {
+      let collection = `https://api.unsplash.com/collections/curated/${collectionId}/photos?client_id=${id}`
+      return collection
+    }
+
+
+    axios.get(collectionUrl(129))
       .then((res) => {
-        const newPicture = res.data.urls
+        const value = res
         this.setState({
-          pictures: newPicture
+          pictures: value
         })
         console.log(this.state.pictures);
       })
       .catch((err) => {
-        console.error('An error occurred ', err)
+        console.log(`An error occurred ${err}`)
       })
   }
   render () {
